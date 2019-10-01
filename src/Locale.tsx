@@ -5,26 +5,29 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 
 const useStyles = makeStyles(() =>
-   createStyles({ formClass: { minWidth: '70px', margin:'0 5px'},  }),
+   createStyles({ formClass: { minWidth: '70px', margin: '0 5px' }, }),
 );
-export default (props = { onChange: (_) => { } }) => {
+export default (props: LocaleProps = { onChange: (_) => { } }) => {
    const { formClass } = useStyles();
-   const [locale, setLocale] = useState('EN');
+   const [locale, setLocale] = useState('RU');
    const onChange = (locale: Locale) => {
       setLocale(locale);
       props.onChange(locale);
    };
    return (
-      <FormControl  className={formClass}>
+      <FormControl className={`${formClass} ${props.className}`}>
          <Select
             value={locale}
             onChange={(e) => { onChange(e.target.value as Locale); }} >
+            <MenuItem value={'RU'}>RU</MenuItem>
             <MenuItem value={'EN'}>EN</MenuItem>
             <MenuItem value={'GE'}>GE</MenuItem>
-            <MenuItem value={'RU'}>RU</MenuItem>
          </Select >
       </FormControl >
    );
 }
-
-type Locale = 'EN' | 'GE' | 'RU';
+type LocaleProps = {
+   className?: string;
+   onChange: (_) => void
+}
+export type Locale = 'EN' | 'GE' | 'RU';

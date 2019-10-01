@@ -35,13 +35,13 @@ const HowInfo = (<>
    </DialogContent>
 </>);
 
-export default memo((props: { className: string }) => {
+export default memo((props: { className?: string }) => {
    const [isOpened, open] = useState(false);
    const closeDialog = () => { open(false) };
    const openDialog = () => { open(true) };
    return (
       <div className={props.className}>
-         <IconButton onClick={openDialog} edge='end'>
+         <IconButton onClick={openDialog}>
             <InfoOutlined />
          </IconButton>
          <Dialog open={isOpened} >

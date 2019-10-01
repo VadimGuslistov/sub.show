@@ -7,6 +7,9 @@ import Head from 'next/head';
 import React from 'react';
 import Content from '@/Content';
 import NoSsr from '@material-ui/core/NoSsr';
+import resources from '@/staticResources';
+import { useState } from 'react'
+import { Locale } from '@/Locale';
 
 const theme = createMuiTheme({
 	palette: {
@@ -15,17 +18,24 @@ const theme = createMuiTheme({
 	},
 });
 
-export default () => (<>
-	<Head>
-		<title>Suby</title>
-	</Head>
-	<ThemeProvider theme={theme}>
-		<CssBaseline />
-		<Container>
-			<NoSsr>
-				<Header />
-				<Content />
-			</NoSsr>
-		</Container>
-	</ThemeProvider>
-</>);
+export default () => {
+	const [videos, setVideos] = useState<string[]>(resources);
+	const [locale, setLocale] = useState<Locale>('RU');
+	const onSearch = (query) => {
+		setVideos((query) ? resources.filter((name) => name.includes(query)) : resources);
+	}
+	return (<>
+		<Head>
+			<title>Suby</title>
+		</Head>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<Container>
+				<NoSsr>
+					<Header onSearch={onSearch} onLocaleChange={setLocale} />
+					<Content videos={videos} locale={locale} />
+				</NoSsr>
+			</Container>
+		</ThemeProvider>
+	</>);
+};

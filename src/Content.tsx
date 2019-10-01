@@ -1,6 +1,7 @@
 import Videocard from '@/VideoCard';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-
+import { memo } from 'react';
+import {Locale} from '@/Locale';
 const useStyles = makeStyles(() =>
    createStyles({
       root: {
@@ -10,11 +11,15 @@ const useStyles = makeStyles(() =>
       }
    }),
 );
-export default () => {
+export default memo((props: Props) => {
    const classes = useStyles();
    return (
       <div className={classes.root}>
-         <Videocard name='[EN]/Blade_Runner_(1982)' />
+         {props.videos.map((name) => <Videocard name={name} key={name} locale={props.locale} />)}
       </div>
    );
+});
+type Props = { 
+   locale: Locale;
+   videos: string[] 
 }
