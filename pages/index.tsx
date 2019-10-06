@@ -6,7 +6,6 @@ import { ThemeProvider } from '@material-ui/styles';
 import Head from 'next/head';
 import React from 'react';
 import Content from '@/Content';
-import NoSsr from '@material-ui/core/NoSsr';
 import resources from '@/staticResources';
 import { useState } from 'react'
 import { Locale } from '@/Locale';
@@ -31,10 +30,8 @@ export default () => {
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<Container>
-				<NoSsr>
-					<Header onSearch={onSearch} onLocaleChange={setLocale} />
-					<Content videos={videos} locale={locale} />
-				</NoSsr>
+				<Header onSearch={onSearch} onLocaleChange={setLocale} />
+				<Content videos={videos} locale={locale} />
 			</Container>
 		</ThemeProvider>
 	</>);
