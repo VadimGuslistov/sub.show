@@ -1,5 +1,5 @@
-import { CardProps } from '@/VideoCard/Card';
-import Name from '@/VideoCard/Name';
+import { CardProps } from '@/VideoCard/types';
+import Title from '@/VideoCard/Title';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import { memo } from 'react';
@@ -8,7 +8,7 @@ const PosterCard = memo<PosterCardProps>((props) => (
    <Card className={props.className} raised>
       <img src={`${props.root}/poster.png`} onClick={props.onPlay} style={{ cursor: 'pointer' }} />
       <CardActions>
-         <Name name={props.title} />
+         <Title title={props.title} play={props.onPlay} />
       </CardActions>
    </Card>
 ));

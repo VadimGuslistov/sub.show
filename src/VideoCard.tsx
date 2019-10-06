@@ -1,22 +1,21 @@
 import { Locale } from '@/Locale';
-import { PlayerProps } from '@/Player';
+import { PlayerProps } from '@/Player/types';
 import { ControlsProps } from '@/VideoCard/Controls';
 import PlayCard from '@/VideoCard/PlayCard';
 import PosterCard from '@/VideoCard/PosterCard';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { memo, useState } from 'react';
 
-
 const useStyles = makeStyles(() =>
    createStyles({
-      cardClass: { maxWidth: '95%', background: '#202020' },
+      cardClass: { maxWidth: '95%', background: '#202020', img: { width: 350, height: 175 } },
       playCardClass: { width: '350px' },
       controlsClass: { marginLeft: 'auto', display: 'flex', alignItems: 'center' },
       dividerClass: { height: 28, margin: 4 },
    })
 );
 
-export default memo<Props>((props) => {
+const VideoCard = memo<Props>((props) => {
    const { cardClass, playCardClass, controlsClass, dividerClass } = useStyles();
    const root = `/static/${props.name}`;
    const title = props.name;
@@ -30,15 +29,17 @@ export default memo<Props>((props) => {
       return <PlayCard
          title={title}
          onPlay={onPlay}
-         className={cardClass}
+         className={`${props.className} ${cardClass}`}
          controlsProps={controlsProps}
          playerProps={playerProps} />
    }
    return <PosterCard
       title={title}
-      className={`${playCardClass} ${cardClass}`}
+      className={`${props.className} ${playCardClass} ${cardClass}`}
       root={root}
       onPlay={onPlay} />
 });
 
-type Props = { name: string; locale: Locale };
+export default VideoCard;
+
+type Props = { className: string; name: string; locale: Locale };

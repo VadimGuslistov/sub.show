@@ -7,6 +7,7 @@ import { useState } from 'react';
 const useStyles = makeStyles(() =>
    createStyles({ formClass: { minWidth: '70px', margin: '0 5px' }, }),
 );
+
 export default (props: LocaleProps = { onChange: (_) => { } }) => {
    const { formClass } = useStyles();
    const [locale, setLocale] = useState('RU');
