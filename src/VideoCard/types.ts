@@ -1,1 +1,2 @@
-export type CardProps = { title: string; className: string; onPlay: () => void }
+import { Resource } from '@/Resources';
+export type CardProps = { resource: Resource; className: string; onPlay: () => void }

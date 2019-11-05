@@ -17,7 +17,6 @@ const AboutInfo = (<>
        </DialogContentText>
       <DialogContentText>
          Just set up your native language and find a video in your target language
-         (the video's primary language is indicated in brackets []).
       </DialogContentText>
    </DialogContent>
 </>);
