@@ -11,11 +11,16 @@ import { Resource } from '@/Resources';
 const useStyles = makeStyles(() =>
    createStyles({
       cardClass: {
-         textAlign: 'center',
+         maxWidth:'800px',
          margin: '20px',
          background: '#202020',
       },
-      playCardClass: { order: -1, maxWidth: '800px' },
+      playCardClass: {
+         display:'flex',
+         justifyContent:'center',
+         order: -1,
+         width: '100%',
+      },
       posterCardClass: { width: '350px' },
       controlsClass: { marginLeft: 'auto', display: 'flex', alignItems: 'center' },
       dividerClass: { height: 28, margin: 4 },
@@ -27,20 +32,22 @@ const VideoCard = memo<Props>((props) => {
    const { resource, userLocale } = props;
    const [isPlaying, setPlayer] = useState(false);
    const onPlay = () => { setPlayer(true); /* search(resource.titles.join('/')); */ }; // search video name for hiding others
-   const onClose = () => { setPlayer(false); /* search(''); */ }; // search for showing others videos
+   const onClose = () => { setPlayer(false); search(''); }; // search for showing others videos
    const onTagClick = (tag: string) => { search(tag); };
    const controlsProps: ControlsProps = { className: controlsClass, dividerClass, onClose };
    const playerProps: PlayerProps = { resource, userLocale };
 
    if (isPlaying) {
-      return <PlayCard
-         className={`${playCardClass} ${cardClass}`}
-         controlsProps={controlsProps}
-         playerProps={playerProps}
-         onTagClick={onTagClick}
-         resource={resource}
-         onPlay={onPlay}
-      />
+      return <div className={playCardClass}>
+         <PlayCard
+            className={cardClass}
+            controlsProps={controlsProps}
+            playerProps={playerProps}
+            onTagClick={onTagClick}
+            resource={resource}
+            onPlay={onPlay}
+         />
+      </div>
    }
    return <PosterCard
       className={`${posterCardClass} ${cardClass}`}

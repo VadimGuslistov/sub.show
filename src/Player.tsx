@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { memo, useState, useEffect } from 'react';
 
 const useStyles = makeStyles({
-  videoClass: { width: '100%', background: 'transparent' },
+  videoClass: { maxWidth: '100%', background: 'transparent' },
 });
 
 const CTRL_KEY_CODE = 17;

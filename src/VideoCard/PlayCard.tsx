@@ -10,12 +10,6 @@ import { memo } from 'react';
 
 const PlayCard = memo<PlayCardProps>((props) => (
    <Card className={props.className} >
-      <Title
-         title={props.resource.title}
-         onTitleClick={() => void 0}
-         flag={props.resource.flag}
-         onLocaleClick={() => { props.onTagClick(props.resource.locale); }}
-      />
       <Player {...props.playerProps} />
       <CardActions>
          <Tags

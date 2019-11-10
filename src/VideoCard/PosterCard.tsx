@@ -13,7 +13,7 @@ const PosterCard = memo<PosterCardProps>((props) => (
          flag={props.resource.flag}
          onLocaleClick={() => { props.onTagClick(props.resource.locale); }}
       />
-      <img src={props.resource.poster} onClick={props.onPlay} style={{ cursor: 'pointer' }} />
+      <img src={props.resource.poster} onClick={props.onPlay} style={{ cursor: 'pointer', width: '100%' }} />
       <CardActions>
          <Tags
             tags={props.resource.tags.slice(0, props.resource.tags.length - 1)}
