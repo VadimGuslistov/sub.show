@@ -2,11 +2,14 @@ import { Locale } from '@/Locale';
 import Track from '@/Player/Track';
 import { Resource } from '@/Resources';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 
 const useStyles = makeStyles({
   videoClass: { width: '100%', background: 'transparent' },
 });
+
+const CTRL_KEY_CODE = 17;
+const STEP = 3;
 
 let timestamp: number = 0;
 
@@ -31,16 +34,20 @@ export default memo<PlayerProps>((props) => {
     isSubShown && showSub(false);
     isUserSubShown && showUserSub(false);
   }
+  
+  function onKeyDown(e: React.KeyboardEvent<HTMLVideoElement>) {
+    if (e.keyCode !== CTRL_KEY_CODE || !videoRef.current) { return; }
+    videoRef.current.currentTime -= STEP;
+  }
 
-  const onError = () => { videoRef.current && console.error(videoRef.current.error); }
   return (
     <video
       preload="auto"
       ref={videoRef}
       controls={true}
       autoPlay={true}
-      onError={onError}
       onSeeked={onSeeked}
+      onKeyDown={onKeyDown}
       className={videoClass}
       onTimeUpdate={onTimeUpdate} >
 

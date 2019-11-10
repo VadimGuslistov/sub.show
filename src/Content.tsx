@@ -8,20 +8,19 @@ const useStyles = makeStyles(() =>
    createStyles({
       root: {
          display: 'flex',
-         // justifyContent:'space-evenly',
-         paddingBottom: '58px',
+         alignItems: 'flex-start',
+         justifyContent:'space-evenly',
          flexDirection: 'row',
          flexWrap: 'wrap',
       },
-      cardClass: { margin: '20px' }
-   }),
+   })
 );
 
 export default memo<Props>((props) => {
-   const { root, cardClass } = useStyles();
+   const { root } = useStyles();
    return (
       <div className={root}> {
-         props.resources.map((r) => <VideoCard className={cardClass} resource={r} key={r.video} userLocale={props.userLocale} />)
+         props.resources.map((r) => <VideoCard resource={r} key={r.video} userLocale={props.userLocale} />)
       } </div>
    );
 });

@@ -4,7 +4,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Head from 'next/head';
 import React from 'react';
-// import { NoSsr } from '@material-ui/core';
+import { NoSsr } from '@material-ui/core';
 import Content from '@/Content';
 import resources, { Resource } from '@/Resources';
 import { useState } from 'react'
@@ -29,10 +29,10 @@ export default () => {
       </Head>
       <ThemeProvider theme={theme}>
          <CssBaseline />
-         {/* <NoSsr> */}
+         <NoSsr>
          <Header onSearch={onSearch} onLocaleChange={setUserLocale} />
          <Content resources={filtered} userLocale={userLocale} />
-         {/* </NoSsr> */}
+         </NoSsr>
       </ThemeProvider>
    </>);
 };
