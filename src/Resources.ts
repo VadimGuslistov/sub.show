@@ -34,8 +34,8 @@ export class Resource {
 }
 
 export default [
-   new Resource(['Friends', 'S1', 'The_One_Where_Monica_Gets_a_Roommate'], 'GE'),
-   new Resource(['Friends', 'S1', 'The_One_Where_Monica_Gets_a_Roommate'], 'EN'),
+   new Resource(['Friends', 'S1', 'E1'], 'GE'),
+   new Resource(['Friends', 'S1', 'E1'], 'EN'),
    new Resource(['Sherlock_Holmes', 'A_Game_of_Shadows', 'Meeting_Moriarty'], 'EN'),
    new Resource(['No_Country_For_Old_Men', 'Coin_Toss'], 'EN')
 ];

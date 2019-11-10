@@ -6,7 +6,7 @@ const Tags = memo<TagsProps>((props) => (<>{
    props.tags.map((tag) =>
       <Typography
          onClick={() => { props.onTagClick(tag); }}
-         style={{ cursor: 'pointer' }}
+         style={{ cursor: 'pointer', display: 'inline' }}
          variant="overline"
          key={tag}>
          {`#${fromHash(tag)} `}
