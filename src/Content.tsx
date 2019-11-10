@@ -19,7 +19,12 @@ export default memo<Props>((props) => {
    const { root } = useStyles();
    return (
       <div className={root}> {
-         props.resources.map((r) => <VideoCard resource={r} key={r.video} userLocale={props.userLocale} />)
+         props.resources.map((r) =>
+            <VideoCard
+               resource={r}
+               key={r.video}
+               userLocale={props.userLocale}
+            />)
       } </div>
    );
 });

@@ -6,21 +6,22 @@ export class Resource {
    public readonly flag: string;
    /** path to dir with video's resources */
    public readonly path: string;
-   /** title of the video */
-   public readonly title: string;
    /** path to video's file */
    public readonly video: string;
    /** path to video's poster */
    public readonly poster: string;
+   /** All tags of videos (season name or film nam, episode or fragment name) */
+   public readonly tags: string[];
 
    constructor (
-      /** All tags of videos (season name or film nam, episode or fragment name) */
-      public readonly tags: string[],
+      titles: string[],
+      /** title of the video */
+      public readonly title: string,
       /** Locale of video's audiotrack */
-      public readonly locale: Locale
+      public readonly locale: Locale,
    ) {
-      this.title = <string> tags[tags.length - 1];
-      this.path = `${Resource.root}/${tags.join('/')}`;
+      this.tags = titles.concat([locale]);
+      this.path = `${Resource.root}/${titles.concat([title]).join('/')}`;
       if (this.path.includes(' ')) { throw new Error(`Path '${this.path}' includes space!`); }
       this.poster = `${this.path}/poster.png`;
       this.video = `${this.path}/${locale}.mp4`;
@@ -34,8 +35,8 @@ export class Resource {
 }
 
 export default [
-   new Resource(['Friends', 'S1', 'E1'], 'GE'),
-   new Resource(['Friends', 'S1', 'E1'], 'EN'),
-   new Resource(['Sherlock_Holmes', 'A_Game_of_Shadows', 'Meeting_Moriarty'], 'EN'),
-   new Resource(['No_Country_For_Old_Men', 'Coin_Toss'], 'EN')
+   new Resource(['Friends', 'S1'], 'E1', 'GE'),
+   new Resource(['Friends', 'S1'], 'E1', 'EN'),
+   new Resource(['Sherlock_Holmes', 'A_Game_of_Shadows'], 'Meeting_Moriarty', 'EN'),
+   new Resource(['No_Country_For_Old_Men'], 'Coin_Toss', 'EN')
 ];
