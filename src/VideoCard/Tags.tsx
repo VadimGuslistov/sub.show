@@ -6,10 +6,10 @@ const Tags = memo<TagsProps>((props) => (<>{
    props.tags.map((tag) =>
       <Typography
          onClick={() => { props.onTagClick(tag); }}
-         style={{ cursor: 'pointer', display: 'inline' }}
-         variant="overline"
+         style={{ cursor: 'pointer', display: 'inline', color:'#ccc', fontFamily:'Lora' }}
+         variant="subtitle1"
          key={tag}>
-         {`#${fromHash(tag)} `}
+         {`${fromHash(tag)}, `}
       </Typography>)
 }</>)
 );

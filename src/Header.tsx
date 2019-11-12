@@ -3,7 +3,7 @@ import Search from '@/Search';
 import AppBar from '@material-ui/core/AppBar';
 import Divider from '@material-ui/core/Divider';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Locale from '@/Locale';
+import LocaleSwitcher, { Locale } from '@/Locale';
 import { memo } from 'react';
 const useStyles = makeStyles(() =>
   createStyles({
@@ -25,7 +25,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export default memo((props: Props) => {
+export default memo<Props>((props) => {
   const { dividerClass, localeClass, barClass } = useStyles();
   return (
     <AppBar className={barClass}>
@@ -33,12 +33,13 @@ export default memo((props: Props) => {
       <Divider className={dividerClass} orientation='vertical' />
       <Search onSearch={props.onSearch} />
       <Divider className={dividerClass} orientation='vertical' />
-      <Locale className={localeClass} onChange={props.onLocaleChange} />
+      <LocaleSwitcher className={localeClass} userLocale={props.userLocale} onChange={props.onLocaleChange} />
     </AppBar>
   );
 })
 
 type Props = {
-  onSearch: (v) => void;
-  onLocaleChange: (l) => void;
+  userLocale: Locale;
+  onSearch: (q: string) => void;
+  onLocaleChange: (l: Locale) => void;
 }

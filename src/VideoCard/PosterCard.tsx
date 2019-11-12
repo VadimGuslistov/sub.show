@@ -15,7 +15,8 @@ const PosterCard = memo<PosterCardProps>((props) => (
       />
       <img src={props.resource.poster} onClick={props.onPlay} style={{ cursor: 'pointer', width: '100%' }} />
       <CardActions>
-         <Tags
+         {/* // TODO убрать грязный хак */}
+         <Tags 
             tags={props.resource.tags.slice(0, props.resource.tags.length - 1)}
             onTagClick={props.onTagClick}
          />

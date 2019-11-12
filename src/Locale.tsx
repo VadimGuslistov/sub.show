@@ -2,33 +2,31 @@ import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 
 const useStyles = makeStyles(() =>
    createStyles({ formClass: { minWidth: '70px', margin: '0 5px' }, }),
 );
 
-export default (props: LocaleProps = { onChange: (_) => { } }) => {
-   const { formClass } = useStyles();
-   const [locale, setLocale] = useState('RU');
-   const onChange = (locale: Locale) => {
-      setLocale(locale);
-      props.onChange(locale);
-   };
-   return (
-      <FormControl className={`${formClass} ${props.className}`}>
-         <Select
-            value={locale}
-            onChange={(e) => { onChange(e.target.value as Locale); }} >
-            <MenuItem value={'RU'}>RU</MenuItem>
-            <MenuItem value={'EN'}>EN</MenuItem>
-            <MenuItem value={'GE'}>GE</MenuItem>
-         </Select >
-      </FormControl >
-   );
-}
-type LocaleProps = {
+export const locales: Locale[] = ['[EN]', '[GE]', '[RU]'];
+
+const LocaleSwitcher = memo<Props>((props) => (
+   <FormControl className={`${useStyles().formClass} ${props.className}`}>
+      <Select
+         onChange={(e) => { props.onChange(e.target.value as Locale); }}
+         value={props.userLocale}>
+         {locales.map((locale) =>
+            <MenuItem key={locale} value={locale}>
+               {locale.replace(/\[|\]/g, '')}
+            </MenuItem>)}
+      </Select>
+   </FormControl >
+));
+export default LocaleSwitcher;
+
+type Props = {
+   userLocale: Locale;
    className?: string;
-   onChange: (_) => void
+   onChange: (l: Locale) => void
 }
-export type Locale = 'EN' | 'GE' | 'RU';
+export type Locale = '[EN]' | '[GE]' | '[RU]';

@@ -3,18 +3,18 @@ import { Locale } from "@/Locale";
 export class Resource {
    public static readonly root = '/static';
    /** path to flag icon */
-   public readonly flag: string;
+   public readonly flag: FlagPath;
    /** path to dir with video's resources */
-   public readonly path: string;
+   public readonly path: Path;
    /** path to video's file */
-   public readonly video: string;
+   public readonly video: VideoPath;
    /** path to video's poster */
-   public readonly poster: string;
+   public readonly poster: PosterPath;
    /** All tags of videos (season name or film nam, episode or fragment name) */
-   public readonly tags: string[];
+   public readonly tags: Tag[];
 
    constructor (
-      titles: string[],
+      titles: Tag[],
       /** title of the video */
       public readonly title: string,
       /** Locale of video's audiotrack */
@@ -35,8 +35,14 @@ export class Resource {
 }
 
 export default [
-   new Resource(['Friends', 'S1'], 'E1', 'GE'),
-   new Resource(['Friends', 'S1'], 'E1', 'EN'),
-   new Resource(['Sherlock_Holmes', 'A_Game_of_Shadows'], 'Meeting_Moriarty', 'EN'),
-   new Resource(['No_Country_For_Old_Men'], 'Coin_Toss', 'EN')
+   new Resource(['Friends', 'S1'], 'E1', '[GE]'),
+   new Resource(['Friends', 'S1'], 'E1', '[EN]'),
+   new Resource(['Sherlock_Holmes', 'A_Game_of_Shadows'], 'Meeting_Moriarty', '[EN]'),
+   new Resource(['No_Country_For_Old_Men'], 'Coin_Toss', '[EN]')
 ];
+
+export type Tag = string;
+export type Path = string;
+export type FlagPath = string;
+export type VideoPath = string;
+export type PosterPath = string;

@@ -1,8 +1,9 @@
 import VideoCard from '@/VideoCard';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { Locale } from '@/Locale';
-import { Resource } from '@/Resources';
+import { Resource, VideoPath } from '@/Resources';
+import { search } from '@/Search';
 
 const useStyles = makeStyles(() =>
    createStyles({
@@ -11,22 +12,46 @@ const useStyles = makeStyles(() =>
          alignItems: 'flex-start',
          flexDirection: 'row',
          flexWrap: 'wrap',
+         paddingBottom: '55px'
       },
    })
 );
 
+
 export default memo<Props>((props) => {
-   const { root } = useStyles();
-   return (
-      <div className={root}> {
+   const rootRef = React.createRef<HTMLDivElement>();
+   const scrollTop = () => {
+      if (typeof window === 'undefined') { return; }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+   };
+   const [playingVideo, play] = useState<VideoPath>();
+   const onPlay = (video: VideoPath) => {
+      play(video);
+      scrollTop();
+   }
+   const onClose = () => {
+      search(''); // search to display other videos
+      play('');
+   };
+   const onTagClick = (tag: string) => {
+      search(tag);
+      play('');
+   };
+
+   return (<div className={useStyles().root} ref={rootRef}>
+      {
          props.resources.map((r) =>
             <VideoCard
-               resource={r}
-               key={r.video}
+               onPlay={() => { onPlay(r.video); }}
+               isPlaying={playingVideo === r.video}
                userLocale={props.userLocale}
+               onTagClick={onTagClick}
+               onClose={onClose}
+               key={r.video}
+               resource={r}
             />)
-      } </div>
-   );
+      }
+   </div>);
 });
 
 type Props = {

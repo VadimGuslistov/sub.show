@@ -34,11 +34,15 @@ export default memo<PlayerProps>((props) => {
     isSubShown && showSub(false);
     isUserSubShown && showUserSub(false);
   }
-  
-  function onKeyDown(e: React.KeyboardEvent<HTMLVideoElement>) {
-    if (e.keyCode !== CTRL_KEY_CODE || !videoRef.current) { return; }
-    videoRef.current.currentTime -= STEP;
-  }
+
+  useEffect(() => {
+    const video = document.querySelector('video');
+    if (!video) { return; }
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.keyCode !== CTRL_KEY_CODE) { return; }
+      video.currentTime -= STEP;
+    }, false);
+  }, []);
 
   return (
     <video
@@ -47,7 +51,6 @@ export default memo<PlayerProps>((props) => {
       controls={true}
       autoPlay={true}
       onSeeked={onSeeked}
-      onKeyDown={onKeyDown}
       className={videoClass}
       onTimeUpdate={onTimeUpdate} >
 

@@ -5,13 +5,13 @@ import { memo } from 'react';
 const Title = memo<TitleProps>((props) => (<>
    <Typography
       onClick={props.onLocaleClick}
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: 'pointer'}}
       component="span">
-      <img src={props.flag} />
+      <img src={props.flag} style={{ cursor: 'pointer', width:32, height:32 }} />
    </Typography>
    <Typography
       onClick={props.onTitleClick}
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: 'pointer', verticalAlign: 'text-bottom' }}
       variant="overline">
       {fromHash(props.title)}
    </Typography>

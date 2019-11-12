@@ -3,8 +3,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Head from 'next/head';
-import React from 'react';
-// import { NoSsr } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { NoSsr } from '@material-ui/core';
 import Content from '@/Content';
 import resources, { Resource } from '@/Resources';
 import { useState } from 'react'
@@ -19,22 +19,28 @@ const theme = createMuiTheme({
 
 export default () => {
    const [filtered, setFiltered] = useState<Resource[]>(resources);
-   const [userLocale, setUserLocale] = useState<Locale>('RU');
+   const [userLocale, setUserLocale] = useState<Locale>('[RU]');
+   // useEffect(() => {
+   //    window['dataLayer'] = (window['dataLayer'] || []).concat([
+   //       'js', new Date(), 'config', 'UA-151959929-1'
+   //    ]);
+   // }, []);
    const onSearch = (query: string) => {
       setFiltered((query) ? filter(resources, query) : resources);
    };
    return (<>
       <Head>
-         <title>Suby</title>
+         <title>Sub.Show</title>
          <link rel="icon" href={Resource.root + "/favicon.ico"} type="image/x-icon" />
          <link rel="shortcut icon" href={Resource.root + "/favicon.ico"} type="image/x-icon" />
+         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151959929-1"></script>
       </Head>
       <ThemeProvider theme={theme}>
          <CssBaseline />
-         {/* <NoSsr> */}
-            <Header onSearch={onSearch} onLocaleChange={setUserLocale} />
-            <Content resources={filtered} userLocale={userLocale} />
-         {/* </NoSsr> */}
+         <NoSsr>
+         <Header onSearch={onSearch} userLocale={userLocale} onLocaleChange={setUserLocale} />
+         <Content resources={filtered} userLocale={userLocale} />
+         </NoSsr>
       </ThemeProvider>
    </>);
 };

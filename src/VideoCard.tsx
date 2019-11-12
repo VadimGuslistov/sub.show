@@ -1,28 +1,31 @@
 import { Locale } from '@/Locale';
 import { PlayerProps } from '@/Player';
+import { Resource } from '@/Resources';
 import { ControlsProps } from '@/VideoCard/Controls';
 import PlayCard from '@/VideoCard/PlayCard';
 import PosterCard from '@/VideoCard/PosterCard';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { memo, useState } from 'react';
-import { search } from '@/Search';
-import { Resource } from '@/Resources';
 
 const useStyles = makeStyles(() =>
    createStyles({
       cardClass: {
-         maxWidth:'800px',
-         margin: '20px',
          background: '#202020',
+         maxWidth: '800px',
+         margin: '20px',
       },
       playCardClass: {
-         display:'flex',
-         justifyContent:'center',
-         order: -1,
+         justifyContent: 'center',
+         display: 'flex',
          width: '100%',
+         order: -1,
       },
       posterCardClass: { width: '350px' },
-      controlsClass: { marginLeft: 'auto', display: 'flex', alignItems: 'center' },
+      controlsClass: {
+         alignItems: 'center',
+         marginLeft: 'auto',
+         display: 'flex',
+      },
       dividerClass: { height: 28, margin: 4 },
    })
 );
@@ -30,36 +33,36 @@ const useStyles = makeStyles(() =>
 const VideoCard = memo<Props>((props) => {
    const { cardClass, playCardClass, posterCardClass, controlsClass, dividerClass } = useStyles();
    const { resource, userLocale } = props;
-   const [isPlaying, setPlayer] = useState(false);
-   const onPlay = () => { setPlayer(true); /* search(resource.titles.join('/')); */ }; // search video name for hiding others
-   const onClose = () => { setPlayer(false); search(''); }; // search for showing others videos
-   const onTagClick = (tag: string) => { search(tag); };
-   const controlsProps: ControlsProps = { className: controlsClass, dividerClass, onClose };
+   const controlsProps: ControlsProps = { className: controlsClass, dividerClass, onClose: props.onClose };
    const playerProps: PlayerProps = { resource, userLocale };
 
-   if (isPlaying) {
-      return <div className={playCardClass}>
-         <PlayCard
-            className={cardClass}
-            controlsProps={controlsProps}
-            playerProps={playerProps}
-            onTagClick={onTagClick}
-            resource={resource}
-            onPlay={onPlay}
-         />
-      </div>
+   if (!props.isPlaying) {
+      return <PosterCard
+         className={`${posterCardClass} ${cardClass}`}
+         onTagClick={props.onTagClick}
+         resource={resource}
+         onPlay={props.onPlay}
+      />
    }
-   return <PosterCard
-      className={`${posterCardClass} ${cardClass}`}
-      resource={resource}
-      onTagClick={onTagClick}
-      onPlay={onPlay}
-   />
+   return <div className={playCardClass}>
+      <PlayCard
+         controlsProps={controlsProps}
+         playerProps={playerProps}
+         onTagClick={props.onTagClick}
+         className={cardClass}
+         resource={resource}
+         onPlay={props.onPlay}
+      />
+   </div>
 });
 
 export default VideoCard;
 
 type Props = {
+   onTagClick: (tag: string) => void;
+   onClose: () => void;
+   onPlay: () => void;
+   isPlaying: boolean;
    userLocale: Locale
    resource: Resource;
 };
