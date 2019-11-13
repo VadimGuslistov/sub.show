@@ -1,8 +1,6 @@
-import Player from '@/Player';
-import { PlayerProps } from '@/Player';
+import Player, { PlayerProps } from '@/Player';
 import Controls, { ControlsProps } from '@/VideoCard/Controls';
 import Tags from '@/VideoCard/Tags';
-import Title from '@/VideoCard/Title';
 import { CardProps } from '@/VideoCard/types';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';

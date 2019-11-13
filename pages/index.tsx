@@ -4,7 +4,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Head from 'next/head';
 import React, { useEffect } from 'react';
-import { NoSsr } from '@material-ui/core';
+// import { NoSsr } from '@material-ui/core';
 import Content from '@/Content';
 import resources, { Resource } from '@/Resources';
 import { useState } from 'react'
@@ -12,7 +12,7 @@ import { Locale } from '@/Locale';
 
 const theme = createMuiTheme({
    palette: {
-      primary: { main: '#202020' },
+      primary: { main: '#202020', light:'#606060' },
       type: 'dark'
    },
 });
@@ -20,11 +20,10 @@ const theme = createMuiTheme({
 export default () => {
    const [filtered, setFiltered] = useState<Resource[]>(resources);
    const [userLocale, setUserLocale] = useState<Locale>('[RU]');
-   // useEffect(() => {
-   //    window['dataLayer'] = (window['dataLayer'] || []).concat([
-   //       'js', new Date(), 'config', 'UA-151959929-1'
-   //    ]);
-   // }, []);
+   useEffect(() => {
+      window['dataLayer'] = window['dataLayer'] || [];
+      window['dataLayer'].push(['js', new Date()], ['config', 'UA-151959929-1']);
+   }, []);
    const onSearch = (query: string) => {
       setFiltered((query) ? filter(resources, query) : resources);
    };
@@ -37,10 +36,10 @@ export default () => {
       </Head>
       <ThemeProvider theme={theme}>
          <CssBaseline />
-         <NoSsr>
+         {/* <NoSsr> */}
          <Header onSearch={onSearch} userLocale={userLocale} onLocaleChange={setUserLocale} />
          <Content resources={filtered} userLocale={userLocale} />
-         </NoSsr>
+         {/* </NoSsr> */}
       </ThemeProvider>
    </>);
 };
