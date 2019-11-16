@@ -6,12 +6,15 @@ import CloseIcon from '@material-ui/icons/Close';
 import React, { memo } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
-   root: { backgroundColor: theme.palette.primary.light }
+   root: {
+      color: theme.palette.primary.light,
+      backgroundColor: theme.palette.primary.main
+   }
 }));
-const Snack = memo<React.PropsWithChildren<Props>>((props) => (
-   <Snackbar 
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      // autoHideDuration={7000}
+const Snack = memo<React.PropsWithChildren<SnackProps>>((props) => (
+   <Snackbar
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      autoHideDuration={6000}
       onClose={props.onClose}
       open={props.isOpen}>
       <SnackbarContent
@@ -31,7 +34,7 @@ const Snack = memo<React.PropsWithChildren<Props>>((props) => (
    </Snackbar>));
 export default Snack;
 
-type Props = {
+export type SnackProps = {
    isOpen: boolean;
    onClose: () => void;
 };

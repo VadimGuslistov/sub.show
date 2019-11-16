@@ -12,7 +12,7 @@ import { Locale } from '@/Locale';
 
 const theme = createMuiTheme({
    palette: {
-      primary: { main: '#202020', light:'#606060' },
+      primary: { main: '#202020', light:'#fff' },
       type: 'dark'
    },
 });
@@ -30,8 +30,8 @@ export default () => {
    return (<>
       <Head>
          <title>Sub.Show</title>
-         <link rel="icon" href={Resource.root + "/favicon.ico"} type="image/x-icon" />
-         <link rel="shortcut icon" href={Resource.root + "/favicon.ico"} type="image/x-icon" />
+         <link rel="icon" href={Resource.root + "/icon/favicon.ico"} type="image/x-icon" />
+         <link rel="shortcut icon" href={Resource.root + "/icon/favicon.ico"} type="image/x-icon" />
          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151959929-1"></script>
       </Head>
       <ThemeProvider theme={theme}>
