@@ -35,6 +35,7 @@ export class Resource {
 }
 
 export default [
+   new Resource([], 'Knocking_on_heavens_door', '[GE]'),
    new Resource(['Friends', 'S1'], 'E1', '[GE]'),
    new Resource(['Friends', 'S1'], 'E1', '[EN]'),
    new Resource(['Sherlock_Holmes', 'A_Game_of_Shadows'], 'Meeting_Moriarty', '[EN]'),

@@ -7,12 +7,12 @@ import React, { useEffect } from 'react';
 // import { NoSsr } from '@material-ui/core';
 import Content from '@/Content';
 import resources, { Resource } from '@/Resources';
-import { useState } from 'react'
+import { useState } from 'react';
 import { Locale } from '@/Locale';
 
 const theme = createMuiTheme({
    palette: {
-      primary: { main: '#202020', light:'#fff' },
+      primary: { main: '#202020', light: '#fff' },
       type: 'dark'
    },
 });
@@ -20,13 +20,19 @@ const theme = createMuiTheme({
 export default () => {
    const [filtered, setFiltered] = useState<Resource[]>(resources);
    const [userLocale, setUserLocale] = useState<Locale>('[RU]');
+   
    useEffect(() => {
+      //  Global site tag (gtag.js) - Google Analytics
       window['dataLayer'] = window['dataLayer'] || [];
-      window['dataLayer'].push(['js', new Date()], ['config', 'UA-151959929-1']);
+      function gtag(...args) { window['dataLayer'].push(args); }
+      gtag('js', new Date());
+      gtag('config', 'UA-151959929-1');
    }, []);
-   const onSearch = (query: string) => {
+
+   function onSearch(query: string) {
       setFiltered((query) ? filter(resources, query) : resources);
    };
+
    return (<>
       <Head>
          <title>Sub.Show</title>
