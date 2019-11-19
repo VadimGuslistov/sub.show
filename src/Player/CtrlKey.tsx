@@ -26,7 +26,7 @@ const CtrlKey = memo<CtrlKeyProps>((props) => {
    return (
       <Snack isOpen={isOpen} onClose={() => { open(false); }}>
          <Typography>
-            Press <Button variant="contained" size="small" onClick={props.onKeyDown}> Ctrl </Button> key to seek backward 4 seconds in player.
+            Press <Button variant="contained" size="small" onClick={props.onKeyDown}> Ctrl </Button> key to seek backward 3 seconds in player.
          </Typography>
       </Snack>);
 });

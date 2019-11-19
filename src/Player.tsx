@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 });
 
 /** Playback step in ms */
-const STEP = 4;
+const STEP = 3;
 
 let timestamp: number = 0;
 let videoEl: HTMLVideoElement;
