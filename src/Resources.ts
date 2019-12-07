@@ -35,6 +35,7 @@ export class Resource {
 }
 
 export default [
+   new Resource(['Unsere_Mutter_Unsere_Vater'], 'E1', '[GE]'),
    new Resource([], 'Knocking_on_heavens_door', '[GE]'),
    new Resource(['Friends', 'S1'], 'E1', '[GE]'),
    new Resource(['Friends', 'S1'], 'E1', '[EN]'),
