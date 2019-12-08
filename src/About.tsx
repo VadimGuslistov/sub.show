@@ -6,8 +6,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import InfoOutlined from '@material-ui/icons/InfoOutlined';
-import { memo, useState } from 'react';
+import { memo, useState, useEffect } from 'react';
 
+const STORAGE_KEY = 'Info';
+const STORAGE_FLAG = 'isShown';
 
 const AboutInfo = (<>
    <DialogTitle > About </DialogTitle>
@@ -38,6 +40,13 @@ export default memo((props: { className?: string }) => {
    const [isOpened, open] = useState(false);
    const closeDialog = () => { open(false) };
    const openDialog = () => { open(true) };
+   useEffect(() => {
+      if (localStorage && localStorage.getItem(STORAGE_KEY) === STORAGE_FLAG) {
+         return;
+      }
+      openDialog();
+      localStorage && localStorage.setItem(STORAGE_KEY, STORAGE_FLAG);
+   }, []);
    return (
       <div className={props.className}>
          <IconButton onClick={openDialog}>
